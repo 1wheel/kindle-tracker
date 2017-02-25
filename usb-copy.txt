@@ -1,0 +1,11 @@
+on adding folder items to this_folder after receiving these_items
+  repeat with aItem in these_items
+    tell application "Finder"
+      if (local volume of aItem) and (name of aItem is "Kindle]") then
+        -- do something with the drive
+        -- eject aItem
+        do shell script "cp -R /Volumes/Kindle/system/userannotlogsDir/* /Users/adam/Desktop/kindle-log/"
+      end if
+    end tell
+  end repeat
+end adding folder items to
