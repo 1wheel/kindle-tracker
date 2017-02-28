@@ -7,3 +7,6 @@ how to copy folder after usb drive inserted
 - http://apple.stackexchange.com/questions/8090/how-to-run-applescript-on-disk-mount
 - http://macscripter.net/viewtopic.php?id=24748
 - http://www.launchd.info/
+
+
+cp -R /Volumes/Kindle/system/userannotlogsDir/* /Users/adam/Desktop/kindle-tracker/logs/
