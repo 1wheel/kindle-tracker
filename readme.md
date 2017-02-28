@@ -10,3 +10,6 @@ how to copy folder after usb drive inserted
 
 
 cp -R /Volumes/Kindle/system/userannotlogsDir/* /Users/adam/Desktop/kindle-tracker/logs/
+
+
+*/10 * * * * /Users/adam/Desktop/kindle-tracker/update.sh
