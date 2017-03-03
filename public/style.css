@@ -1,0 +1,9 @@
+svg{
+	overflow: visible;
+}
+
+body{
+  font-family: monospace;
+  margin: 0px;
+  overflow: hidden;
+}

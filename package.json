@@ -1,0 +1,25 @@
+{
+  "name": "kindle-tracker",
+  "version": "1.0.0",
+  "description": "pip install --upgrade https://github.com/msuozzo/Lector/tarball/master",
+  "main": "parse.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1wheel/kindle-tracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/1wheel/kindle-tracker/issues"
+  },
+  "homepage": "https://github.com/1wheel/kindle-tracker#readme",
+  "dependencies": {
+    "d3": "^4.7.1",
+    "glob": "^7.1.1",
+    "underscore": "^1.8.3"
+  }
+}
