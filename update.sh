@@ -5,3 +5,5 @@ cp -R /Volumes/Kindle/system/userannotlogsDir/* /Users/adam/Desktop/kindle-track
 
 #git commit 'data-update' 
 #git push
+
+node /Users/adam/Desktop/kindle-tracker/parse.js
