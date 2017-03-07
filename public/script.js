@@ -5,7 +5,7 @@ d3.json('data.json', function(err, res){
   data.forEach(function(d){
     d.date = d3.isoParse(d.modificationDate)
     d.pos = d.position.pos
-    d.asin = d.contentReference.asin
+    d.isbn = d.contentReference.asin
   })
   console.log(data[0])
 
