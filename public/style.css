@@ -2,8 +2,19 @@ svg{
 	overflow: visible;
 }
 
-body{
+svg{
   font-family: monospace;
   margin: 0px;
   /*overflow: hidden;*/
+}
+
+.y.axis .domain{
+  display: none;
+}
+
+.axis line,
+.axis path {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
 }

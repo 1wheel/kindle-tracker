@@ -24,7 +24,7 @@ d3.json('data.json', function(err, res){
 
   var sel = d3.select('#kindle-slope').html('')
   var c = d3.conventions({parentSel: sel, width: 750, height: 150, margin: {left: 80*1}})
-
+return;
   c.x = d3.scaleTime()
     .domain(d3.extent(data, ƒ('date')))
     .range(c.x.range())
@@ -32,7 +32,7 @@ d3.json('data.json', function(err, res){
   c.y.domain([0, d3.max(data, ƒ('pos'))])
 
   c.yAxis.ticks(5)
-  c.xAxis.scale(c.x).tickFormat(d3.timeFormat("%m/%d")).ticks(5)
+  c.xAxis.scale(c.x).tickFormat(d3.timeFormat('%m/%d')).ticks(5)
   c.drawAxis()
 
    line = d3.line()
@@ -65,21 +65,51 @@ d3.csv('lookups.csv', function(err, res){
   words = res
 
   words.forEach(function(d){
-    d.word = d.word_key.split(':')[1]
+    d.actualWord = d.word_key.split(':')[1]
+    d.word = d.actualWord.toLowerCase()
+    d.bbox = [
+      [-(d.word.length*5),  -5],
+      [ (d.word.length*5),   5]
+    ]
+    
     d.date = new Date(+d.timestamp)
-    d.hour = d.time.getHours()
+    d.hour = d.date.getHours()
   })
 
 
-  var sel = d3.select('#kindle-slope').html('')
-  var c = d3.conventions({parentSel: sel, width: 750, height: 150, margin: {left: 80*1}})
+  var sel = d3.select('#kindle-vocab').html('')
+  var c = d3.conventions({parentSel: sel, width: 750, height: 450, margin: {left: 80*1}})
+
 
   c.x = d3.scaleTime()
     .domain(d3.extent(words, ƒ('date')))
     .range(c.x.range())
 
-  c.y.domain([0, 23])
-  
+  c.y.domain([24, 0])
+
+  c.yAxis.ticks(5).tickFormat(d => d3.format('02')(d) + ':00' )
+  c.xAxis.scale(c.x).tickFormat(d3.timeFormat('%b %Y')).ticks(5)
+  c.drawAxis()
+
+
+  var collide = d3.bboxCollide(d => d.bbox)
+
+  var simulation = d3.forceSimulation(words)
+    .force('x', d3.forceX(d => c.x(d.date)))
+    .force('y', d3.forceY(d => c.y(d.hour)))
+    .force('collide', collide)
+    .force('container', d3.forceContainer([[50, 0], [c.width, c.height]]))
+    .stop()
+
+  for (var i = 0; i < 30; i++) simulation.tick()
+
+  var wordSel = c.svg.appendMany(words, 'g')
+    .translate(d => [d.x, d.y])
+    .call(d3.attachTooltip)
+
+  wordSel.append('text').text(ƒ('word'))
+    .at({textAnchor: 'middle'})
+
 
 
 })
