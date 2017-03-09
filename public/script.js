@@ -64,12 +64,16 @@ return;
 d3.csv('lookups.csv', function(err, res){
   words = res
 
+  var wordHeight = 14
+
   words.forEach(function(d){
     d.actualWord = d.word_key.split(':')[1]
     d.word = d.actualWord.toLowerCase()
+
+    d.length = d.word.length*8.5
     d.bbox = [
-      [-(d.word.length*5),  -5],
-      [ (d.word.length*5),   5]
+      [-d.length/2,  -wordHeight/2],
+      [ d.length/2,   wordHeight/2]
     ]
     
     d.date = new Date(+d.timestamp)
@@ -98,7 +102,7 @@ d3.csv('lookups.csv', function(err, res){
     .force('x', d3.forceX(d => c.x(d.date)))
     .force('y', d3.forceY(d => c.y(d.hour)))
     .force('collide', collide)
-    .force('container', d3.forceContainer([[50, 0], [c.width, c.height]]))
+    .force('container', d3.forceContainer([[100, 0], [c.width, c.height]]))
     .stop()
 
   for (var i = 0; i < 30; i++) simulation.tick()
@@ -107,8 +111,17 @@ d3.csv('lookups.csv', function(err, res){
     .translate(d => [d.x, d.y])
     .call(d3.attachTooltip)
 
+  wordSel.append('rect')
+    .at({
+      x: d => -d.length/2,
+      width: d=> d.length,
+      y: -wordHeight/2 + .5,
+      height: wordHeight - 0,
+      stroke: '#fff'
+    })
+
   wordSel.append('text').text(ƒ('word'))
-    .at({textAnchor: 'middle'})
+    .at({textAnchor: 'middle', dy: '.33em', fill: '#fff'})
 
 
 

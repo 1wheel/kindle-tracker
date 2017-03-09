@@ -1,11 +1,15 @@
 svg{
-	overflow: visible;
 }
 
 svg{
+	overflow: visible;
   font-family: monospace;
   margin: 0px;
   /*overflow: hidden;*/
+}
+
+svg text.vocab{
+  font-size: 13px;
 }
 
 .y.axis .domain{

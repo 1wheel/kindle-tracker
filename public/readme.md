@@ -1,1 +1,1 @@
-Trying to replicate [http://www.ignant.com/submissions/parratoro-moire-as-energy-beings/](http://www.ignant.com/submissions/parratoro-moire-as-energy-beings/). 
+Code for www.roadtolarissa.com/kindle-tracker - interesting bits in `script.js`
