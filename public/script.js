@@ -8,12 +8,13 @@ var isbnToName = {
 
 d3.json('data.json', function(err, res){
   data = res
+  console.log('hi')
   data.forEach(function(d){
     d.date = d3.isoParse(d.modificationDate)
     d.pos = d.position.pos
     d.isbn = d.contentReference.asin
   })
-  data = data.filter(d => d.date < new Date(2017, 2, 0))
+  // data = data.filter(d => d.date < new Date(2017, 2, 0))
 
   byBook = d3.nestBy(data, ƒ('isbn'))
   byBook.forEach(d => {
@@ -24,7 +25,7 @@ d3.json('data.json', function(err, res){
 
   var sel = d3.select('#kindle-slope').html('')
   var c = d3.conventions({parentSel: sel, width: 750, height: 150, margin: {left: 80*1}})
-return;
+
   c.x = d3.scaleTime()
     .domain(d3.extent(data, ƒ('date')))
     .range(c.x.range())
@@ -35,7 +36,7 @@ return;
   c.xAxis.scale(c.x).tickFormat(d3.timeFormat('%m/%d')).ticks(5)
   c.drawAxis()
 
-   line = d3.line()
+  line = d3.line()
     .x(ƒ('date', c.x))
     .y(ƒ('pos', c.y))
     .curve(d3.curveStep)
