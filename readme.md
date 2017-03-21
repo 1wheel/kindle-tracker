@@ -1,9 +1,11 @@
-Code for www.roadtolarissa.com/kindle-tracker.
+Code for www.roadtolarissa.com/kindle-tracker to copy your kindle reading logs to your computer and parses them.
 
 ```
 */10 * * * * /Users/adam/Desktop/kindle-tracker/update.sh
 ```
 
-Will set up a cron job to run `update.sh` every 10 minutes. It'll copy your kindle reading logs to your computer and parse them.
+Sets up a cron job to run `update.sh` every 10 minutes. In `update.sh`, modify the paths to point to this repo on your local computer: 
 
-`public/` has some rudimentary code to visualize the logs.  
+`cp -R /Volumes/Kindle/system/userannotlogsDir/* /Users/adam/Desktop/kindle-tracker/logs/`
+
+Parsed logs are saved in `public/` which also contains some rudimentary visualization code.   
