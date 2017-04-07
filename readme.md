@@ -1,4 +1,4 @@
-Code for www.roadtolarissa.com/kindle-tracker to copy your kindle reading logs to your computer and parses them.
+Code for www.roadtolarissa.com/kindle-tracker to copy your kindle reading logs to your computer and parse them.
 
 ```
 */10 * * * * /Users/adam/Desktop/kindle-tracker/update.sh
