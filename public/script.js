@@ -1,4 +1,7 @@
 console.clear()
+
+d3.select('body').selectAppend('div.tooltip')
+
 var ƒ = d3.f
 
 var isbnToName = {
@@ -19,7 +22,7 @@ d3.json('data.json', function(err, res){
   byBook = d3.nestBy(data, ƒ('isbn'))
   byBook.forEach(d => {
     d.last = _.last(d)
-    d.title = isbnToName[d.key] || ''
+    d.title = isbnToName[d.key] || d[0].contentReference.guid.slice(0, 15)
     d.titleSpans = d3.wordwrap(d.title, 15)
   })
 
@@ -51,6 +54,7 @@ d3.json('data.json', function(err, res){
   var lastSel = c.svg.appendMany(byBook, 'g')
     .filter(d => d.last.pos > 1000)
     .translate(d => [c.x(d.last.date), c.y(d.last.pos)])
+    .call(d3.attachTooltip)
 
   lastSel.append('circle')
     .at({r: 3, stroke: '#000', fill: '#fff', cy: -4})
