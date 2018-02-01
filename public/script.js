@@ -27,7 +27,7 @@ d3.json('data.json', function(err, res){
   })
 
   var sel = d3.select('#kindle-slope').html('')
-  var c = d3.conventions({parentSel: sel, width: 750, height: 150, margin: {left: 80*1}})
+  var c = d3.conventions({parentSel: sel, width: 2200, height: 150, margin: {left: 80*1}})
 
   c.x = d3.scaleTime()
     .domain(d3.extent(data, ƒ('date')))
@@ -60,7 +60,7 @@ d3.json('data.json', function(err, res){
     .at({r: 3, stroke: '#000', fill: '#fff', cy: -4})
 
   lastSel.append('text')
-    .at({textAnchor: 'middle', y: d => d.titleSpans.length*-13})
+    .at({textAnchor: 'left', y: d => d.titleSpans.length*-13})
     .tspans(ƒ('titleSpans'))
 })
 
