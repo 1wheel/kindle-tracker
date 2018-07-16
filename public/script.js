@@ -27,7 +27,7 @@ d3.json('data.json', function(err, res){
   })
 
   var sel = d3.select('#kindle-slope').html('')
-  var c = d3.conventions({parentSel: sel, width: 2200, height: 150, margin: {left: 80*1}})
+  var c = d3.conventions({parentSel: sel, width: 4000, height: 500, margin: {left: 80*1, right: 300}})
 
   c.x = d3.scaleTime()
     .domain(d3.extent(data, ƒ('date')))
@@ -36,7 +36,7 @@ d3.json('data.json', function(err, res){
   c.y.domain([0, d3.max(data, ƒ('pos'))])
 
   c.yAxis.ticks(5)
-  c.xAxis.scale(c.x).tickFormat(d3.timeFormat('%m/%d')).ticks(5)
+  c.xAxis.scale(c.x).tickFormat(d3.timeFormat('%m/%d')).ticks(20)
   c.drawAxis()
 
   line = d3.line()
