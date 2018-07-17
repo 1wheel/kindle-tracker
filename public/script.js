@@ -20,11 +20,21 @@ d3.json('data.json', function(err, res){
   // data = data.filter(d => d.date < new Date(2017, 2, 0))
 
   byBook = d3.nestBy(data, ƒ('isbn'))
-  byBook.forEach(d => {
+  byBook = byBook.map(d => {
+    var maxPos = d3.max(d, d => d.pos)
+    d = d.filter((e, i) => {
+      if (!i) return true
+      return d[i - 1].pos < e.pos
+    })
+
     d.last = _.last(d)
     d.title = isbnToName[d.key] || d[0].contentReference.guid.slice(0, 15)
     d.titleSpans = d3.wordwrap(d.title, 15)
+    d.maxPos = maxPos
+
+    return d
   })
+  byBook = byBook.filter(d => d.maxPos > 500000)
 
   var sel = d3.select('#kindle-slope').html('')
   var c = d3.conventions({parentSel: sel, width: 4000, height: 500, margin: {left: 80*1, right: 300}})
@@ -33,7 +43,7 @@ d3.json('data.json', function(err, res){
     .domain(d3.extent(data, ƒ('date')))
     .range(c.x.range())
 
-  c.y.domain([0, d3.max(data, ƒ('pos'))])
+  c.y.domain([0, 3000000])
 
   c.yAxis.ticks(5)
   c.xAxis.scale(c.x).tickFormat(d3.timeFormat('%m/%d')).ticks(20)
